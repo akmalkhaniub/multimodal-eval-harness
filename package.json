@@ -1,0 +1,29 @@
+{
+  "name": "@applied-ai/multimodal-eval-harness",
+  "version": "1.0.0",
+  "description": "Production multimodal model evaluation framework, cost modeling, and resilient fallback cascade.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "multimodal-bench": "./dist/bin/run-benchmark.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "benchmark": "node --import tsx src/bin/run-benchmark.ts",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.24.2",
+    "commander": "^13.1.0",
+    "picocolors": "^1.1.1",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0",
+    "tsx": "^4.19.0",
+    "@types/node": "^22.0.0"
+  }
+}
