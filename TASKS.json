@@ -1,0 +1,13 @@
+[
+  {
+    "id": "MEH-001",
+    "status": "TODO",
+    "priority": 1,
+    "title": "Add Automated HTML/Markdown Leaderboard Export",
+    "description": "Implement a reporter that formats evaluation benchmark results into an interactive HTML table and markdown summary comparing model precision, latency, and token cost.",
+    "acceptance_criteria": [
+      "Generates leaderboard.html and leaderboard.md",
+      "Unit test verifies table rendering with dummy eval scores"
+    ]
+  }
+]
