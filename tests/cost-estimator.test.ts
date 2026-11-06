@@ -25,4 +25,21 @@ describe('Multimodal Cost Estimator & FinOps Tracker', () => {
 
     expect(costPer1k).toBeGreaterThan(1.0); // Claude Sonnet runs around $16-$17 per 1k complex multimodal calls
   });
+
+  it('should accurately calculate Gemini 2.5 Flash and Gemini 3.7 Flash tiers', () => {
+    const cost25 = MultimodalCostEstimator.calculateCost('gemini-2.5-flash', {
+      inputTokens: 1000,
+      outputTokens: 500,
+      mediaUnits: 1
+    });
+
+    const cost37 = MultimodalCostEstimator.calculateCost('gemini-3.7-flash', {
+      inputTokens: 1000,
+      outputTokens: 500,
+      mediaUnits: 1
+    });
+
+    expect(cost25).toBeGreaterThan(0);
+    expect(cost25).toEqual(cost37);
+  });
 });

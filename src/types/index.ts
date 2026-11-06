@@ -1,4 +1,14 @@
-export type ModelProvider = 'gemini-2.0-flash' | 'gemini-2.0-pro' | 'claude-3-7-sonnet' | 'claude-3-5-haiku' | 'gpt-4o' | 'gpt-4o-mini' | 'mock-provider';
+export type ModelProvider =
+  | 'gemini-2.0-flash'
+  | 'gemini-2.0-pro'
+  | 'gemini-2.5-flash'
+  | 'gemini-2.5-pro'
+  | 'gemini-3.7-flash'
+  | 'claude-3-7-sonnet'
+  | 'claude-3-5-haiku'
+  | 'gpt-4o'
+  | 'gpt-4o-mini'
+  | 'mock-provider';
 
 export interface MultimodalInput {
   id: string;
