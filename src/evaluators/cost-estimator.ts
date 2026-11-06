@@ -38,6 +38,12 @@ export const PRICING_REGISTRY: Record<ModelProvider, ModelPricingTier> = {
     cachedInputPerMillionUsd: 0.0375,
     perMediaUnitUsd: 0.00015
   },
+  'gemini-3.8-flash': {
+    inputPerMillionUsd: 0.15,
+    outputPerMillionUsd: 0.60,
+    cachedInputPerMillionUsd: 0.0375,
+    perMediaUnitUsd: 0.00015
+  },
   'claude-3-7-sonnet': {
     inputPerMillionUsd: 3.00,
     outputPerMillionUsd: 15.00,

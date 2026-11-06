@@ -4,6 +4,7 @@ export type ModelProvider =
   | 'gemini-2.5-flash'
   | 'gemini-2.5-pro'
   | 'gemini-3.7-flash'
+  | 'gemini-3.8-flash'
   | 'claude-3-7-sonnet'
   | 'claude-3-5-haiku'
   | 'gpt-4o'
