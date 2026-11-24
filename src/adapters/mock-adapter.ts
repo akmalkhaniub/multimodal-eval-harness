@@ -28,7 +28,7 @@ export class MockMultimodalAdapter implements IMultimodalAdapter {
   }
 
   public async process(input: MultimodalInput): Promise<ProviderResponse> {
-    const latency = this.options.simulatedLatencyMs || 100;
+    const latency = this.options.simulatedLatencyMs ?? 100;
     const status = this.options.simulatedStatus || 'SUCCESS';
     const usage = this.options.tokenUsage || { inputTokens: 500, outputTokens: 150, mediaUnits: 1 };
     const cost = MultimodalCostEstimator.calculateCost(this.provider, usage);

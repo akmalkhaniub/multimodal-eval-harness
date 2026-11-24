@@ -54,6 +54,15 @@ export class MultimodalFallbackCascade {
 
       // Try with retries
       for (let retry = 0; retry <= this.maxRetriesPerProvider; retry++) {
+        if (!breaker.isAvailable()) {
+          attempts.push({
+            provider: adapter.provider,
+            status: 'CIRCUIT_BREAKER_OPEN',
+            latencyMs: 0,
+            error: 'Provider circuit breaker tripped OPEN during retries.'
+          });
+          break;
+        }
         try {
           const res = await adapter.process(input);
           totalCost += res.costUsd;
@@ -77,8 +86,12 @@ export class MultimodalFallbackCascade {
             };
           }
 
-          // If rate limited or network error, record failure
-          if (res.status === 'RATE_LIMITED_429' || res.status === 'NETWORK_ERROR' || res.status === 'TIMEOUT') {
+          if (
+            res.status === 'RATE_LIMITED_429' ||
+            res.status === 'NETWORK_ERROR' ||
+            res.status === 'TIMEOUT' ||
+            res.status === 'SCHEMA_ERROR'
+          ) {
             breaker.recordFailure();
           }
         } catch (err: any) {

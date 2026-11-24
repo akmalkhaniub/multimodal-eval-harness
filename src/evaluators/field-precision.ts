@@ -52,7 +52,7 @@ export class FieldPrecisionEvaluator {
 
         if (normExp === normAct) {
           fieldScores.push({ field: key, expected: exp, actual: act, score: 1.0, matchType: 'EXACT' });
-        } else if (normExp.includes(normAct) || normAct.includes(normExp)) {
+        } else if (normExp.length > 0 && normAct.length > 0 && (normExp.includes(normAct) || normAct.includes(normExp))) {
           fieldScores.push({ field: key, expected: exp, actual: act, score: 0.85, matchType: 'FUZZY' });
         } else {
           fieldScores.push({ field: key, expected: exp, actual: act, score: 0.0, matchType: 'MISMATCH' });

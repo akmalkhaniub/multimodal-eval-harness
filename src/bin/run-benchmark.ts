@@ -1,11 +1,11 @@
 #!/usr/bin/env node
+import { Command } from 'commander';
 import pc from 'picocolors';
-import { MockMultimodalAdapter } from '../adapters/mock-adapter.js';
 import { MultimodalCostEstimator } from '../evaluators/cost-estimator.js';
 import { BenchmarkReporter } from '../reporter/benchmark-reporter.js';
 import { BenchmarkAggregate } from '../types/index.js';
 
-async function runBenchmark() {
+async function runBenchmark(outDir: string) {
   console.log(pc.cyan('\n🚀 Running Multimodal Comparative Benchmark Suite...\n'));
 
   // Benchmark profile aggregates for simulated multimodal tasks
@@ -52,12 +52,21 @@ async function runBenchmark() {
     }
   ];
 
-  const report = BenchmarkReporter.generateMarkdownTable(aggregates);
-  console.log(report);
-  console.log(pc.green('\n✅ Benchmark suite completed successfully.\n'));
+  const exported = await BenchmarkReporter.exportLeaderboard(aggregates, outDir);
+  console.log(exported.markdown);
+  console.log(pc.green(`\n✅ Exported leaderboard artifacts:\n   - ${exported.markdownPath}\n   - ${exported.htmlPath}\n`));
 }
 
-runBenchmark().catch(err => {
+const program = new Command();
+program
+  .name('multimodal-bench')
+  .description('Run comparative multimodal benchmark suite and export HTML/Markdown leaderboards')
+  .option('-o, --out-dir <dir>', 'Output directory for leaderboard.html and leaderboard.md', '.')
+  .action(async (opts: { outDir: string }) => {
+    await runBenchmark(opts.outDir);
+  });
+
+program.parseAsync(process.argv).catch(err => {
   console.error(pc.red(`Benchmark failed: ${err.message}`));
   process.exit(1);
 });

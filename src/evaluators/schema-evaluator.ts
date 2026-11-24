@@ -8,7 +8,7 @@ export interface SchemaValidationResult {
 
 export class SchemaEvaluator {
   public static validate(schema: ZodSchema | Record<string, any>, data: any): SchemaValidationResult {
-    if (!data || typeof data !== 'object') {
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
       return {
         valid: false,
         errors: ['Output data is not a valid JSON object.']

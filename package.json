@@ -12,7 +12,7 @@
     "build": "tsc",
     "test": "vitest run",
     "benchmark": "node --import tsx src/bin/run-benchmark.ts",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit -p tsconfig.test.json"
   },
   "dependencies": {
     "zod": "^3.24.2",
